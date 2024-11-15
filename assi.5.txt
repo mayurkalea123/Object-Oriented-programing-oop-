@@ -1,0 +1,52 @@
+//program based on the overloding operator
+
+#include<iostream>
+using namespace std;
+class television
+{
+    int mn,sz,pz;
+    
+public:
+    friend istream & operator >> (istream &,television &);
+    friend ostream & operator << (ostream & ,television &);
+};
+istream & operator >> (istream &din,television &t)
+{
+    int e;
+    cout<<"Enter the Model no,size,prize";
+    din>>t.mn>>t.sz>>t.pz;
+    
+    try
+    {
+    if(t.sz<12 || t.sz>70 || t.mn>9999 || t.pz<0 || t.pz>5000)
+    {
+       throw
+        e;
+    }
+    }
+    catch(int e)
+    {
+        cout<<"The exception is catch:";
+        t.mn=0;
+        t.sz=0;
+        t.pz=0;
+    }
+    return din;
+    
+}
+ostream & operator << (ostream &dout,television &t)
+{
+    dout<<"The model no is:"<<t.mn;
+    dout<<"The model size is:"<<t.sz;
+    dout<<"The prize is:"<<t.pz;
+    return dout;
+}
+
+int main()
+{
+    television t;
+    cin>>t;
+    cout<<t;
+    return 0;
+}
+    
