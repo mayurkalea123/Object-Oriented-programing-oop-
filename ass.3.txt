@@ -1,0 +1,119 @@
+#include <iostream>
+using namespace std;
+
+class complex {
+    float r, img;
+
+public:
+    complex() {
+        r = 0;
+        img = 0;
+    }
+   
+    complex(float rr, float im) {
+        r = rr;
+        img = im;
+    }
+   
+    void display() {
+        cout << r << " + " << img << "i" << endl;
+    }
+   
+    complex operator +(complex);
+    friend complex operator -(complex, complex);
+    complex operator *(complex);
+    complex operator /(complex);
+};
+
+complex complex::operator +(complex c2) {
+    complex c3;
+    c3.r = r + c2.r;
+    c3.img = img + c2.img;
+    return c3;
+}
+
+complex operator -(complex c1, complex c2) {
+    complex c3;
+    c3.r = c1.r - c2.r;
+    c3.img = c1.img - c2.img;
+    return c3;
+}
+
+complex complex::operator *(complex c2) {
+    complex c3;
+    c3.r = r * c2.r - img * c2.img;
+    c3.img = r * c2.img + img * c2.r;
+    return c3;
+}
+
+complex complex::operator /(complex c2) {
+    complex c3;
+    float denominator = c2.r * c2.r + c2.img * c2.img;
+    if (denominator == 0) {
+        cout << "Error: Division by zero!" << endl;
+        return complex(0, 0); // Return a default complex number
+    }
+    c3.r = (r * c2.r + img * c2.img) / denominator;
+    c3.img = (img * c2.r - r * c2.img) / denominator;
+    return c3;
+}
+
+int main() {
+    int ch;
+    float rr, im;
+   
+    cout << "\nEnter the first complex number (real and imaginary parts): ";
+    cin >> rr >> im;
+    complex c1(rr, im);
+    cout << "The first complex number is: ";
+    c1.display();
+   
+    cout << "\nEnter the second complex number (real and imaginary parts): ";
+    cin >> rr >> im;
+    complex c2(rr, im);
+    cout << "The second complex number is: ";
+    c2.display();
+ 
+    do {
+        cout << "\nMenu:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> ch;
+       
+        switch(ch) {
+            case 1: {
+                complex c3 = c1 + c2;
+                cout << "\nThe addition of the two complex numbers is: ";
+                c3.display();
+                break;
+            }
+            case 2: {
+                complex c3 = c1 - c2;
+                cout << "\nThe subtraction of the two complex numbers is: ";
+                c3.display();
+                break;
+            }
+            case 3: {
+                complex c3 = c1 * c2;
+                cout << "\nThe multiplication of the two complex numbers is: ";
+                c3.display();
+                break;
+            }
+            case 4: {
+                complex c3 = c1 / c2;
+                cout << "\nThe division of the two complex numbers is: ";
+                c3.display();
+                break;
+            }
+            case 5:
+                cout << "Exiting the program." << endl;
+                return 0;
+            default:
+                cout << "Wrong choice. Please try again." << endl;
+        }
+
+        cout << "Do you want to continue? (1 for Yes, 0 for No): ";
+        cin >> ch; // Change variable name to avoid confusion
+    } while (ch != 0);
+ 
+    return 0;
+}
