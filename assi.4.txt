@@ -1,0 +1,91 @@
+//program based on the Pure virtual fuction
+
+#include<iostream>
+using namespace std;
+
+class shape{
+      
+      virtual void Calculate_Area()=0;
+      public:
+      int r;
+      int side;
+      int l,b;
+      
+      
+};
+          
+
+class Circle : public shape
+{  public:
+   void Calculate_Area()
+  {  
+     cout<<"enter the radius of the circle\n";
+     cin>>r;
+     float area=3.14*r*r;
+     cout<<area<<"sq.unit";
+     
+     
+   }
+   
+}c;
+
+class Square : public shape
+{  public:
+   void Calculate_Area()
+  {
+     cout<<"enter the length o side of square\n";
+     cin>>side;
+     int are=side*side;
+     cout<<are<<"sq.unit";
+   }
+   
+}s;
+
+class Rectangle : public shape
+{  public:
+   void Calculate_Area()
+  {
+     cout<<"enter the length of rectangle\n";
+     cin>>l;
+     cout<<"enter the breadth of rectangle\n";
+     cin>>b;
+     int ar=l*b;
+     cout<<ar<<"sq.unit";
+   }
+   
+}re;
+
+int main()
+{
+    int n;
+    while(true)
+    {
+      cout<<"\nenter your choice which area you want to calculate";
+      cout<<"\n1.Circle";
+      cout<<"\n2.Square";
+      cout<<"\n3.Rectangle";
+      cout<<"\n4.Exit\n";
+      cin>>n;
+      switch(n)
+      {
+        case 1:
+        c.Calculate_Area();
+        break;
+        case 2:
+        s.Calculate_Area();
+        break;
+        case 3:
+        re.Calculate_Area();
+        break;
+        case 4:
+        return 0;
+        
+        default:
+        cout<<"wrong choice";
+      
+      }
+    }
+    return 0;
+
+
+}
