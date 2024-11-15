@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+template<class T>
+void sort (T a[])
+{   int n,i,j;
+    T temp;
+    cout<<"\nEnter the no of element\n";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    
+    for(i=0;i<n;i++)
+    {
+        for(j=i+1;j<n;j++)
+        {
+            if(a[i]>a[j])
+            {
+                temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
+        }
+    }
+    
+    cout<<"Sorted arreyas are";
+    for(i=0;i<n;i++)
+    {
+        cout<<"\n"<<a[i];
+    }
+}
+int main()
+{    int a[10];
+     float b[10];
+     char c[10];
+     int ch,chh;
+    do{
+        cout<<"Selection sort\n";
+        cout<<"What do you want to perfom\n";
+        cout<<"1.integer op"<<"\n"<<"2.float"<<"\n"<<"3.char"<<"\n";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:sort(a);
+                break;
+            case 2:sort(b);
+                break;
+            case 3:sort(c);
+                break;
+            default:cout<<"Wrong choice";
+        }
+        cout<<"Do you want to contineu press 1:";
+        cin>>chh;
+     }while(chh==1);
+    return 0;
+}
