@@ -1,0 +1,122 @@
+//Program based on book lab 
+
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+class booki //initialize the class
+{
+public:
+    int prize, stock;
+    char *author, *title, *publisher;
+    // Constructor
+    booki() {
+        author = new char[100];// dynamic allocate the  size 
+        title = new char[100];
+        publisher = new char[100];
+        prize = 52;
+        stock = 44;
+        strcpy(author, "fill");
+        strcpy(title, "the");
+        strcpy(publisher, "details");
+    }
+
+    // Destructor
+    ~booki() {
+        delete[] author;
+        delete[] title;
+        delete[] publisher;
+    }
+
+    void accept();
+    void display();
+    void search();
+}a[50];
+int n;
+//function for accept the info
+void booki::accept() {
+    cout << "How many number of data do you want to insert? ";
+    cin >> n;
+    
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter the title: ";
+        cin >> a[i].title;
+        cout << "Enter the author: ";
+        cin >> a[i].author;
+        cout << "Enter the publisher: ";
+        cin >> a[i].publisher;
+        cout << "Enter the Prize: ";
+        cin >> a[i].prize;
+        cout << "Enter the number of stock: ";
+        cin >> a[i].stock;
+    }
+}
+//fuction  for display
+void booki::display() {
+    cout<<"Name"<<"\t\t"<<"Author"<<"\t\t"<<"publisher"<<"\t\t"<<"prize"<<"\t\t"<<"stock";
+    for (int i = 0; i < n; i++) {
+        cout << a[i].title << "\t" << a[i].author << "\t" << a[i].publisher <<a[i].prize<<"\t"<<a[i].stock<<"\n";
+    }
+}
+//fuction for searching and tell copies are available or not
+void booki::search() {
+    int f = 0, c;
+    char t[100],s[100];                                          
+    cout << "\nEnter the Title: ";
+    cin >> t;
+    cout << "Enter the Author: ";
+    cin >> s;
+
+    for (int i = 0; i < n; i++) {
+        if (strcmp(a[i].title, t) == 0 && strcmp(a[i].author, s) == 0) {
+            f = 1;
+            cout << "Enter the number of copies: ";
+            cin >> c;
+            if (c <= a[i].stock) {
+                cout << "Yes, the copies are available.\n";
+                int total = c * a[i].prize;
+                cout << "The total prize is: " << total << "\n";
+            } else {
+                cout << "Sorry, but the copies are not available.\n";
+            }
+            break;
+        }
+    }
+    if (f == 0) {
+        cout << "Sorry, book is not available.\n";
+    }
+}
+
+int main() {
+    int ch;
+    booki b; // Instantiate booki object
+
+    do {
+        cout << "\n1. Accept the data";
+        cout << "\n2. Display the data";
+        cout << "\n3. Search";
+        cout << "\nEnter your choice: ";
+        cin >> ch;
+
+        switch (ch) {
+            case 1:
+                b.accept();
+                break;
+            case 2:
+                b.display();
+                break;
+            case 3:
+                b.search();
+                break;
+            default:
+                cout << "Wrong choice.\n";
+                break;
+        }
+
+        cout << "Do you want to continue? Press 1: ";
+        cin >> ch;
+    } while (ch == 1);
+
+    return 0;
+}
+
