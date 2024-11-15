@@ -1,0 +1,142 @@
+// implementation of bank process by using diff operations
+#include <iostream>
+using namespace std;
+// Global variables
+int n, i, j;
+// Class to manage bank account operations
+class bank
+{   
+    private:
+        int account;    // Account number
+        int ammount;    // Amount in the account
+        string name;    // Name of the account holder
+        
+    public:
+        void accept();  
+        void display();  
+        void diposite(); 
+        void withdraw();
+} m[100];  
+
+// Method to accept user data
+void bank::accept()
+{
+    cout << "how many no of user data do you want to insert:";
+    cin >> n;  // Number of users
+
+    for (i = 0; i < n; i++)
+    {
+        cout << "\nEnter the Name:";
+        cin >> m[i].name;  // Input name
+        cout << "\nEnter the account no:";
+        cin >> m[i].account;  // Input account number
+        cout << "\nEnter the ammount:";
+        cin >> m[i].ammount;  // Input amount in the account
+    }
+}
+
+// Method to display user data
+void bank::display()
+{
+    cout << "Name" << "\tAccount" << "\tAmmount" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << m[i].name << "\t\t" << m[i].account << "\t\t" << m[i].ammount << endl;
+    }
+}
+
+// Method to deposit money into an account
+void bank::diposite()
+{
+    int acc, am, flag = 0;  // Account number, deposit amount, and flag to check if account exists
+    cout << "enter your account no:";
+    cin >> acc;  // Input account number
+
+    for (i = 0; i < n; i++)
+    {
+        if (m[i].account == acc)
+        {
+            flag = 1;  // Account found
+            cout << "Enter the amount:";
+            cin >> am;  // Input deposit amount
+            m[i].ammount = m[i].ammount + am;  // Update amount
+        }
+    }
+
+    if (flag == 0)
+    {
+        cout << "Sorry account is not match Try again\n";  // Account not found
+    }
+}
+
+// Method to withdraw money from an account
+void bank::withdraw()
+{
+    int acc, w, t;  // Account number, withdrawal amount, and temporary variable
+    int f = 0;     // Flag to check if account exists
+    cout << "enter your account no:";
+    cin >> acc;  // Input account number
+
+    for (i = 0; i < n; i++)
+    {
+        if (m[i].account == acc)
+        {
+            f = 1;  // Account found
+            cout << "how much money do you want to withdraw:";
+            cin >> w;  // Input withdrawal amount
+
+            if (m[i].ammount > w)
+            {
+                t = m[i].ammount - w;  // Calculate remaining amount
+            }
+
+            if (t >=500)
+            {
+                m[i].ammount = m[i].ammount - w;  // Update amount if sufficient funds
+            }
+            else
+            {
+                cout << "Sorry ammount is less you can't access cash\n";  // Insufficient funds
+            }
+        }
+    }
+
+    if (f == 0)
+    {
+        cout << "\nSorry account is not match";  // Account not found
+    }
+}
+
+// Main function to run the program
+int main()
+{
+    int ch;  // Choice for the menu
+    bank m;  // Create an instance of the bank class
+
+    do
+    {
+        // Display menu
+        cout << "\n1.accept" << "\n2.display" << "\n3.deposit" << "\n4.withdraw:\n";
+        cout << "\n enter the choice:";
+        cin >> ch;  // Input choice
+
+        // Perform operations based on choice
+        switch (ch)
+        {
+            case 1: m.accept();  // Accept user data
+                    break;
+            case 2: m.display();  // Display user data
+                    break;
+            case 3: m.diposite();  // Deposit money
+                    break;
+            case 4: m.withdraw();  // Withdraw money
+                    break;
+            default: cout << "wrong choice";  // Invalid choice
+        }
+
+        cout << "do you want to continue then press 1";
+        cin >> ch;  // Continue or exit
+    } while (ch != 0);  // Loop until user chooses to exit
+
+    return 0;
+}
