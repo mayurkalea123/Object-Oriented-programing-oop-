@@ -1,0 +1,35 @@
+//program  based on the virtual fuction
+
+#include <iostream>
+using namespace std;
+class Base {
+public:
+    virtual void show() {
+        std::cout << "Base class show function\n";
+    }
+    virtual ~Base() { // Virtual destructor for proper cleanup
+        std::cout << "Base class destructor\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {  // Overriding the base class virtual function
+        std::cout << "Derived class show function\n";
+    }
+
+    ~Derived() {
+        std::cout << "Derived class destructor\n";
+    }
+};
+
+int main() {
+    Base* basePtr;
+    Derived derivedObj;
+
+    basePtr = &derivedObj;
+    basePtr->show();  // Calls Derived class show()
+
+    delete basePtr; 
+    return 0;// Calls Derived's destructor, then Base's destructor
+}
