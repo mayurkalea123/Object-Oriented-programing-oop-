@@ -1,0 +1,72 @@
+//program based on the inheritance
+
+#include<iostream>
+using namespace std;
+class student
+{
+     int rollno;
+     protected:
+     string prn,name;
+     public:
+     void accept();
+     void display();
+};
+void student::accept()
+{
+    cout<<"Enter the name:";
+    cin>>name;
+    cout<<"Enter the roll:";
+    cin>>rollno;
+    cout<<"Enter the prn:";
+    cin>>prn;  
+}
+void student::display()
+{
+    cout<<name<<"\t"<<rollno<<"\t"<<prn<<"\n";
+}
+class test:public student
+{
+    int c1,c2,c3,e1,e2,e3;
+    protected:
+    string s1,s2,s3;
+    public:
+    void acceptt();
+    void displayt();
+};
+void test::acceptt()
+{    test t[20];
+    for(int i=0;i<3;i++)
+    {
+    
+    cout<<"Enter the mark of CIA 1:";
+    cin>>c1;
+    cout<<"Enter the mark of CIA 2:";
+    cin>>t[i].c2;
+    cout<<"Enter the mark of CIA 3:";
+    cin>>t[i].c3;
+    cout<<"Enter the mark of End sem 1:";
+    cin>>t[i].e1;
+    cout<<"Enter the mark of End sem 1:";
+    cin>>t[i].e2;
+    cout<<"Enter the mark of End sem1:";
+    cin>>t[i].c3;
+    }
+    s1=(t[0].c1+t[0].c2+t[0].c3+t[0].e1+t[0].e2+t[0].e3)/3;
+    s2=(t[1].c1+t[1].c2+t[1].c3+t[1].e1+t[1].e2+t[1].e3)/3;
+    s3=(t[2].c1+t[2].c2+t[2].c3+t[2].e1+t[2].e2+t[2].e3)/3;
+}
+void test::displayt()
+{
+    cout<<s1<<"\t"<<s2<<"\t"<<s3<<"\n";
+}
+int main()
+{   student aa;
+    test ss;
+    aa.accept();
+    aa.display();
+    ss.acceptt();
+    ss.displayt();
+    return 0;
+}
+
+  
